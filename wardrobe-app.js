@@ -8,6 +8,7 @@
   const characterAssets={alok:alokAssets};
   delete assets.characters;
   const getVersion = () => window.currentAlokVersion || 'android-normal';
+  const versionLabels={'android-normal':'Android · FF thường','android-max':'Android · FF MAX','ios-normal':'iOS · FF thường','ios-max':'iOS · FF MAX'};
   const getVoice=()=> 'fish';
   const selection = () => Object.fromEntries(fields.map(k => [k, Number($(k).value)]));
   const picked = (field, s=selection()) => assets.itemCatalog[field][s[field]];
@@ -99,6 +100,9 @@
       : assets.mixExportDeferred.includes(getVersion())
         ? 'Xuất file phối chéo cho phiên bản này sẽ bổ sung khi có thêm dữ liệu.'
         : 'Cách phối này thiếu dữ liệu xuất.';
+    const chosenCount=fields.filter(k=>!picked(k,s).default).length;
+    const versionName=versionLabels[getVersion()]||getVersion();
+    $('action-summary').textContent=versionName+' · '+chosenCount+' món đã chọn';
     window.dispatchEvent(new CustomEvent('wardrobe-change',{detail:s}));
   }
   window.alokWardrobe={get assets(){return assets;},selection,getVersion,getVoice,picked,fileForSelection,ready:Promise.resolve(assets.manifest)};
@@ -126,6 +130,7 @@
     setDefaults();
     update();
   }
+  window.resetWardrobeToDefault=resetCharacter;
   $('reset').addEventListener('click',resetCharacter);
   $('front').addEventListener('click',resetCharacter);
   $('randomize').addEventListener('click',()=>{
@@ -139,11 +144,18 @@
     }
     applyFullSetHair();applyTitanRules('top');applyBottomShoes();applyTitanRules('mask');applyMordecai();update();
   });
-  const versionLabels={'android-normal':'Android · FF thường','android-max':'Android · FF MAX','ios-normal':'iOS · FF thường','ios-max':'iOS · FF MAX'};
   function updateVersionLabels(){
-    $('platform-label').textContent=versionLabels[getVersion()];
+    const [device,edition]=getVersion().split('-');
+    document.querySelectorAll('[data-device]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.device===device)));
+    document.querySelectorAll('[data-edition]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.edition===edition)));
     const count=$('wardrobe-intro').querySelector('.count');if(count)count.textContent=versionLabels[getVersion()];
   }
+  document.querySelectorAll('[data-device],[data-edition]').forEach(button=>button.addEventListener('click',()=>{
+    const [currentDevice,currentEdition]=getVersion().split('-');
+    const nextDevice=button.dataset.device||currentDevice,nextEdition=button.dataset.edition||currentEdition;
+    const version=$('version');version.value=nextDevice+'-'+nextEdition;
+    version.dispatchEvent(new Event('change',{bubbles:true}));
+  }));
   $('version').addEventListener('change',()=>{
     if(downloading)return;
     const chosen=Object.fromEntries(fields.map(k=>[k,picked(k).id]));
@@ -159,6 +171,13 @@
   });
   window.addEventListener('alok-version-change',()=>{populate();updateVersionLabels();update();});
   updateVersionLabels();
+  const guide=$('first-run-guide');
+  let guideDismissed=false;try{guideDismissed=localStorage.getItem('mduy-guide-dismissed')==='1';}catch{}
+  if(guideDismissed)guide.hidden=true;
+  $('dismiss-guide').addEventListener('click',()=>{
+    guide.hidden=true;
+    try{localStorage.setItem('mduy-guide-dismissed','1');}catch{}
+  });
   $('download').addEventListener('click',async()=>{
     const chosen=selection(), version=getVersion(), file=fileForSelection(chosen); if(!file || downloading) return;
     downloading=true; update();startMod();
