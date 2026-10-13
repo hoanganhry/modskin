@@ -357,7 +357,7 @@ THE SOFTWARE.
 <body>
   <div class="shell">
     <header class="topbar">
-      <a class="brand" href="#" aria-label="Trang chủ MDUY MOD FF"><span class="brandmark">M</span> MDUY MOD FF / WARDROBE</a>
+      <a class="brand" href="#" aria-label="Trang chủ Dev Hoàng Xuân Tú"><span class="brandmark">D</span> Dev Hoàng Xuân Tú</a>
       <div class="fish-top-actions"><div class="platform"><span class="dot"></span> <span id="platform-label">Chọn phiên bản</span></div><div class="fish-nav"><button id="fish-menu-toggle" class="fish-menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="fish-menu"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><nav id="fish-menu" class="fish-menu" aria-label="Menu chính" hidden><a href="https://t.me/modskinff0">Báo lỗi</a></nav></div></div>
     </header>
 
@@ -465,7 +465,7 @@ window.alokLoadPayload=async function(url,total,progress,signal){
 };
 let exportReady;
 window.alokEnsureExport=(progress,signal)=>exportReady||(exportReady=window.alokLoadPayload(["./export-f5626d75adfe-0.bin", "./export-f5626d75adfe-1.bin"],30708227,progress,signal).then(d=>{const a=window.alokWardrobe.assets;a.mixEngine.compressed=d.compressed;a.downloads=d.downloads;}).catch(e=>{exportReady=null;throw e;}));
-window.alokBoot=window.alokLoadPayload('./wardrobe-b6178fca57b6.gz',5789396,p=>{document.getElementById('preview-status').textContent='Đang tải trang phục… '+p+'%';}).then(a=>{window.__alokPackedAssets=a;return new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='./wardrobe-app.js?v=20261013-studio';s.onload=resolve;s.onerror=reject;document.body.append(s);});}).then(()=>new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='./wardrobe-preview.js?v=20261011-perf1';s.onload=resolve;s.onerror=()=>reject(new Error('Không tải được mô hình 3D'));document.body.append(s);})).catch(e=>{document.getElementById('preview-status').textContent='Không tải được trang phục: '+e.message;document.getElementById('preview-message').classList.add('preview-failed');});
+window.alokBoot=window.alokLoadPayload('./wardrobe-b6178fca57b6.gz',5789396,p=>{document.getElementById('preview-status').textContent='Đang tải trang phục… '+p+'%';}).then(a=>{window.__alokPackedAssets=a;return new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='./wardrobe-app.js?v=20261013-studio';s.onload=resolve;s.onerror=reject;document.body.append(s);});}).then(()=>new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='./wardrobe-preview.js?v=20261013-hd';s.onload=resolve;s.onerror=()=>reject(new Error('Không tải được mô hình 3D'));document.body.append(s);})).catch(e=>{document.getElementById('preview-status').textContent='Không tải được trang phục: '+e.message;document.getElementById('preview-message').classList.add('preview-failed');});
 </script>
 
 <!-- Export dependencies, MIT licenses:
