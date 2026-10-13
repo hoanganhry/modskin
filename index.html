@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#0D0D10">
+  <meta name="theme-color" content="#000000">
   <title>Hoàng Xuân Tú — PHỐI ĐỒ 3D</title>
   <style>
-    :root{color-scheme:dark;--bg:#111116;--panel:#1b1b23;--line:#30303a;--muted:#a1a1b0;--text:#f1f1f6;--accent:#b29aff;--green:#c5ee87}
+    :root{color-scheme:dark;--bg:#000000;--panel:#151515;--line:#303030;--muted:#a1a1a1;--text:#f1f1f1;--accent:#b29aff;--green:#c5ee87}
     *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
     button,select,a{-webkit-tap-highlight-color:transparent}button,select{font:inherit}button,a{touch-action:manipulation}button{cursor:pointer}button:disabled{cursor:wait;opacity:.5}
     button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:4px}button{color:inherit}a{color:inherit;text-decoration:none}
@@ -15,9 +15,9 @@
     .platform{color:var(--muted);font-size:12px;display:flex;gap:8px;align-items:center}.dot{height:6px;width:6px;background:var(--green);border-radius:50%}
     .intro{padding:36px 0 26px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px}.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:700;margin:0 0 8px}
     h1{font-size:34px;letter-spacing:-1px;line-height:1.15;margin:0 0 9px}.sub{color:var(--muted);margin:0;font-size:13px}.count{color:var(--muted);font-size:12px;padding-bottom:2px}
-    .workspace{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(350px,1fr);gap:22px;align-items:start}.stage{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#17171f;position:sticky;top:20px}
+    .workspace{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(350px,1fr);gap:22px;align-items:start}.stage{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#111;position:sticky;top:20px}
     .stage-head{position:absolute;z-index:2;top:22px;left:24px;right:24px;display:flex;justify-content:space-between;align-items:center;pointer-events:none}.character-name{font-size:20px;font-weight:800;letter-spacing:3px}.badge{font-size:10px;letter-spacing:1px;color:var(--muted);border:1px solid #494950;border-radius:20px;padding:4px 10px}
-    #viewport{height:550px;position:relative;background:radial-gradient(ellipse at 50% 45%,#343041 0,#201e29 38%,#17171f 75%)}#viewport canvas{width:100%;height:100%;display:block;touch-action:none}
+    #viewport{height:550px;position:relative;background:radial-gradient(ellipse at 50% 45%,#242424 0,#171717 38%,#0a0a0a 75%)}#viewport canvas{width:100%;height:100%;display:block;touch-action:none}
     .watermark{position:absolute;top:15%;left:50%;transform:translateX(-50%);font-size:100px;font-weight:900;letter-spacing:14px;color:#ffffff05;pointer-events:none;white-space:nowrap}
     #fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:none}.preview-message{position:absolute;inset:0;display:grid;place-content:center;padding:35px;text-align:center;color:var(--muted);font-size:13px;pointer-events:none}.preview-message.hidden{display:none}
     .stage-footer{padding:15px 22px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}.hint{margin:0;color:var(--muted);font-size:11px;max-width:270px}.view-tools{display:flex;gap:7px;flex-shrink:0}.small-button{background:#252530;border:1px solid #3c3b47;border-radius:8px;min-width:36px;padding:7px 10px;font-size:12px;white-space:nowrap}
