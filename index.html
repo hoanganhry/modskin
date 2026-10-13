@@ -534,7 +534,7 @@ function u32(n){const b=new Uint8Array(4);new DataView(b.buffer).setUint32(0,n);
 function u16(n){const b=new Uint8Array(2);new DataView(b.buffer).setUint16(0,n);return b;}
 function i64(n){const b=new Uint8Array(8);new DataView(b.buffer).setBigUint64(0,BigInt(n));return b;}
 
-// FISH MOD Z — AudioClip replacement (applies to every Alok export)
+// Hoàng Xuân Tú voice — AudioClip replacement (applies to every Alok export)
 // Replacement source: user-provided MP3, converted to Unity-compatible 16 kHz mono PCM WAV.
 const FISH_VOICE_NAMES=["VO_DJ_AWAKENING_Tap_EN", "VO_DJ_AWAKENING_CharSelect_EN", "VO_DJ_AWAKENING_CharSelect", "VO_DJ_AWAKENING_StoreSelect_EN", "VO_DJ_AWAKENING_Tap", "VO_DJ_AWAKENING_StoreSelect", "VO_DJ_AWAKENING_LvlUp", "VO_DJ_AWAKENING_LvlUp_EN"];
 const FISH_VOICE_RESOURCE_NAME='CAB-f8c3eb715f84f14b893995ea2dd8e798.resource';
@@ -840,32 +840,7 @@ self.onmessage=async event=>{
     <button type="button" id="mod-cancel">HỦY TẠO FILE</button>
     <p class="mod-progress-note">Vui lòng giữ nguyên trang này trong lúc hệ thống ghép dữ liệu.</p>
   </div>
-</div><script>
-(() => {
-  const fixCopyright = () => {
-    const el = document.getElementById('selection-summary');
-    if (el && el.textContent.includes('Bản quyền FISH MOD Z')) {
-      el.textContent = el.textContent.replaceAll('Bản quyền FISH MOD Z', 'Bản quyền Hoàng Xuân Tú');
-    }
-  };
-  const watch = () => {
-    fixCopyright();
-    const el = document.getElementById('selection-summary');
-    if (el && !el.dataset.manhduyCopyrightWatch) {
-      el.dataset.manhduyCopyrightWatch = '1';
-      new MutationObserver(fixCopyright).observe(el, {childList:true, characterData:true, subtree:true});
-    }
-  };
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', watch, {once:true});
-  } else {
-    watch();
-  }
-  // Keep correcting the label if the app rewrites the summary after a selection change.
-  setInterval(watch, 250);
-})();
-</script>
-
+</div>
 <script id="mduy-3d-sharp-runtime">
 (() => {
   const tune = () => {
