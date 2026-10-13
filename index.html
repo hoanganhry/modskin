@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#111116">
-  <title>MDUY MOD FF — PHỐI ĐỒ 3D</title>
+  <title>Hoàng Xuân Tú — PHỐI ĐỒ 3D</title>
   <style>
     :root{color-scheme:dark;--bg:#111116;--panel:#1b1b23;--line:#30303a;--muted:#a1a1b0;--text:#f1f1f6;--accent:#b29aff;--green:#c5ee87}
     *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -364,7 +364,7 @@ THE SOFTWARE.
 
 
     <div class="intro" id="wardrobe-intro">
-      <div><p class="eyebrow">MDUY MOD FF · STUDIO</p><h1 id="fish-mod-turns" aria-live="polite">Phối đồ 3D</h1><p class="sub">Chọn thiết bị, phối trang phục và tạo file mod.</p></div>
+      <div><p class="eyebrow">HOÀNG XUÂN TÚ · STUDIO</p><h1 id="fish-mod-turns" aria-live="polite">Phối đồ 3D</h1><p class="sub">Chọn thiết bị, phối trang phục và tạo file mod.</p></div>
       <div class="count">Android · FF thường</div>
     </div>
     <aside class="first-run-guide" id="first-run-guide">
@@ -391,7 +391,7 @@ THE SOFTWARE.
           </div>
           <div class="mduy-3d-label"><span class="mduy-live-dot"></span><span id="m3d-mode">3D LIVE</span></div>
           <div class="mduy-3d-grid" id="mduy-3d-grid" aria-hidden="true"></div>
-          <span class="watermark" aria-hidden="true">MDUY MOD FF</span>
+          <span class="watermark" aria-hidden="true">HOÀNG XUÂN TÚ</span>
           <img id="fallback" alt="Alok mặc bộ trang phục đang chọn">
           <div id="preview-message" class="preview-message" role="status"><div class="preview-skeleton" aria-hidden="true"><span></span><span></span><span></span></div><span id="preview-status">Đang tải model nhân vật…</span></div>
         </div>
@@ -434,7 +434,7 @@ THE SOFTWARE.
       <a id="download-fallback" hidden>Tải file vừa tạo</a>
     </section>
     <noscript><p class="noscript">Bật JavaScript để chọn trang phục và tải file.</p></noscript>
-    <footer><span>Dữ liệu Alok cho Android và iOS · Free Fire thường / MAX.</span><span>MDUY MOD FF · 4 phiên bản.</span></footer>
+    <footer><span>Dữ liệu Alok cho Android và iOS · Free Fire thường / MAX.</span><span>Hoàng Xuân Tú · 4 phiên bản.</span></footer>
   </div>
 
 <script>
@@ -661,7 +661,7 @@ self.onmessage=async event=>{
   const bundle=await pack(base,patch,compressed,p=>postMessage({id,progress:p}));postMessage({id,progress:80});
   const [os,game]=version.split('-');
   const folder=os==='android'?(game==='max'?'com.dts.freefiremax':'com.dts.freefireth')+'/files/contentcache/Optional/android/optionalavatarres/gameassetbundles/':'Documents/contentcache/Optional/ios/optionalavatarres/gameassetbundles/';
-  const zip=fflate.zipSync({[folder+base.bundleName]:bundle,['Bản quyền mod thuộc về Mạnh Duy.TXT']:decode('QuG6o24gcXV54buBbiBtb2QgdGh14buZYyB24buBIE3huqFuaCBEdXk=')},{level:0});
+  const zip=fflate.zipSync({[folder+base.bundleName]:bundle,['Bản quyền mod thuộc về Hoàng Xuân Tú.TXT']:decode('QuG6o24gcXV54buBbiBtb2QgdGh14buZYyB24buBIEhvw6BuZyBYdcOibiBUw7o=')},{level:0});
   postMessage({id,result:zip.buffer},[zip.buffer]);
  }catch(error){postMessage({id,error:error.message||String(error)});}
 };
@@ -730,9 +730,9 @@ self.onmessage=async event=>{
 })();
 </script>
 <script id="alok-download-package">(() => {
- const prefixes={'android-normal':'MDUY MOD FF ALOK THỨC TỈNH ADR FFTH','android-max':'MDUY MOD FF ALOK THỨC TỈNH ADR FFM','ios-normal':'MDUY MOD FF ALOK THỨC TỈNH IOS FFTH','ios-max':'MDUY MOD FF ALOK THỨC TỈNH IOS FFM'};
- const copyrightName="Bản quyền mod thuộc về Mạnh Duy.TXT";
- const copyrightBytes=Uint8Array.from(atob("QuG6o24gcXV54buBbiBtb2QgdGh14buZYyB24buBIE3huqFuaCBEdXk="),c=>c.charCodeAt(0));
+ const prefixes={'android-normal':'Hoàng Xuân Tú ALOK THỨC TỈNH ADR FFTH','android-max':'Hoàng Xuân Tú ALOK THỨC TỈNH ADR FFM','ios-normal':'Hoàng Xuân Tú ALOK THỨC TỈNH IOS FFTH','ios-max':'Hoàng Xuân Tú ALOK THỨC TỈNH IOS FFM'};
+ const copyrightName="Bản quyền mod thuộc về Hoàng Xuân Tú.TXT";
+ const copyrightBytes=Uint8Array.from(atob("QuG6o24gcXV54buBbiBtb2QgdGh14buZYyB24buBIEhvw6BuZyBYdcOibiBUw7o="),c=>c.charCodeAt(0));
  const usedCodes=new Set();
  let lastCode;try{lastCode=localStorage.getItem("alok-last-export-code");}catch{}
  window.alokPackageDownload=(bytes,version)=>{
@@ -825,7 +825,7 @@ self.onmessage=async event=>{
     <div class="mod-progress-top">
       <div class="mod-progress-icon">✦</div>
       <div class="mod-progress-title-wrap">
-        <p class="mod-progress-kicker">MDUY MOD FF</p>
+        <p class="mod-progress-kicker">HOÀNG XUÂN TÚ</p>
         <div class="mod-progress-heading">
           <span id="mod-progress-title">Đang tạo file mod</span>
           <span id="mod-progress-percent">0%</span>
@@ -845,7 +845,7 @@ self.onmessage=async event=>{
   const fixCopyright = () => {
     const el = document.getElementById('selection-summary');
     if (el && el.textContent.includes('Bản quyền FISH MOD Z')) {
-      el.textContent = el.textContent.replaceAll('Bản quyền FISH MOD Z', 'Bản Quyền Mạnh Duy');
+      el.textContent = el.textContent.replaceAll('Bản quyền FISH MOD Z', 'Bản quyền Hoàng Xuân Tú');
     }
   };
   const watch = () => {
@@ -906,7 +906,7 @@ self.onmessage=async event=>{
   fullscreen?.addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await viewport.requestFullscreen();}catch{document.getElementById('status').textContent='Trình duyệt không hỗ trợ toàn màn hình.';}});
   shot?.addEventListener('click',()=>{
     const canvas=viewport.querySelector('canvas');if(!canvas)return;
-    try{canvas.toBlob(blob=>{if(!blob)return;const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='MDUY-MOD-3D.png';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);},'image/png');}
+    try{canvas.toBlob(blob=>{if(!blob)return;const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='Hoang-Xuan-Tu-MOD-3D.png';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);},'image/png');}
     catch{document.getElementById('status').textContent='Không chụp được ảnh xem trước.';}
   });
   const message=document.getElementById('preview-message');
@@ -959,7 +959,7 @@ self.onmessage=async event=>{
   const packageOne=async(version,bytes)=>window.alokPackageDownload(bytes,version);
 
   function begin(packaged){
-    offerDownload(packaged.bytes,packaged.name||'MDUY-MOD.zip');
+    offerDownload(packaged.bytes,packaged.name||'Hoang-Xuan-Tu-MOD.zip');
   }
 
   async function makeAndDownload(btn){
@@ -979,7 +979,7 @@ self.onmessage=async event=>{
           const packaged=await packageOne(versionMap[name]||name.replace(/\.zip$/,''),data);
           bundle[packaged.name]=packaged.bytes;
         }
-        offerDownload(fflate.zipSync(bundle,{level:0}),'MDUY MOD FF ALOK 4 PHIEN BAN.zip');
+        offerDownload(fflate.zipSync(bundle,{level:0}),'Hoàng Xuân Tú - ALOK 4 phiên bản.zip');
         return;
       }
       step.textContent='Đang tạo MOD…';

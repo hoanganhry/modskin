@@ -108,7 +108,7 @@
   window.alokWardrobe={get assets(){return assets;},selection,getVersion,getVoice,picked,fileForSelection,ready:Promise.resolve(assets.manifest)};
   function updateCharacterLabels(){
     document.querySelector('.character-name').textContent=assets.characterName.toUpperCase();
-    document.querySelector('.watermark').textContent='MDUY MOD FF';
+    document.querySelector('.watermark').textContent='HOÀNG XUÂN TÚ';
     document.querySelector('.stage').setAttribute('aria-label','Xem trước nhân vật '+assets.characterName);
     $('fallback').alt=assets.characterName+' mặc bộ trang phục đang chọn';
     const isIgnis=assets.characterId==='ignis';
@@ -227,7 +227,7 @@
       const bundleEntries=Object.fromEntries(readyFiles.map(packaged=>[packaged.name,packaged.bytes]));
       const bundleBytes=fflate.zipSync(bundleEntries,{level:0});
       const bundleUrl=URL.createObjectURL(new Blob([bundleBytes],{type:'application/zip'}));
-      const link=document.createElement('a');link.href=bundleUrl;link.download='MDUY_MOD_FF_4_PHIEN_BAN.zip';link.style.display='none';
+      const link=document.createElement('a');link.href=bundleUrl;link.download='Hoàng Xuân Tú - 4 phiên bản.zip';link.style.display='none';
       document.body.append(link);link.click();link.remove();
       setTimeout(()=>URL.revokeObjectURL(bundleUrl),60000);
       controls.forEach(el=>el.disabled=false);downloading=false;$('mod-progress').hidden=true;update();
