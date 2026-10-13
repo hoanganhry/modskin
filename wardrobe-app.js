@@ -122,7 +122,12 @@
   populate();
   fields.forEach(k=>$(k).addEventListener('change',()=>{if(k==='hair')applyFullSetHair();if(k==='bottom')applyBottomShoes();if(k==='top'||k==='mask')applyTitanRules(k);if(k==='hair'||k==='mask')applyMordecai(k);update();}));
   $('wardrobe-form').addEventListener('submit',e=>e.preventDefault());
-  $('reset').addEventListener('click',()=>{setDefaults();update();});
+  function resetCharacter(){
+    setDefaults();
+    update();
+  }
+  $('reset').addEventListener('click',resetCharacter);
+  $('front').addEventListener('click',resetCharacter);
   $('randomize').addEventListener('click',()=>{
     const before=JSON.stringify(selection());
     for(let trial=0;trial<12;trial++) {
@@ -214,4 +219,3 @@
   });
   update();
 })();
-
