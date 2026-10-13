@@ -216,12 +216,6 @@ THE SOFTWARE.
 .watermark{opacity:.02 !important}
 </style>
 
-
-<style id="mduy-lock-css">
-#mduy-lock{position:fixed;inset:0;z-index:20000;background:#030513d9;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:grid;place-items:center;padding:18px}
-#mduy-lock[hidden]{display:none}.mduy-lock-card{width:min(460px,100%);border:1px solid #5967a5;border-radius:22px;padding:22px;background:linear-gradient(145deg,#111833,#28122f);box-shadow:0 25px 90px #000b,0 0 45px #8f6bff35;color:#fff}.mduy-lock-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.mduy-lock-head h2{margin:0;font-size:24px}.mduy-lock-kicker{margin:0 0 5px;color:#62eaff;font-size:10px;font-weight:900;letter-spacing:2px}.mduy-lock-head button{border:1px solid #4a5790;background:#151b37;color:#fff;border-radius:10px;width:36px;height:36px;font-size:24px;line-height:1}.mduy-lock-card>p{color:#bfc8e8;font-size:13px;line-height:1.65}.mduy-lock-step{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid #343f70;background:#0d1430aa;border-radius:13px;margin-top:9px}.mduy-lock-step>span{display:grid;place-items:center;flex:0 0 27px;height:27px;border-radius:50%;background:linear-gradient(135deg,#ff5fcf,#716cff);font-weight:900}.mduy-lock-step strong,.mduy-lock-step small{display:block}.mduy-lock-step small{color:#929dc5;margin-top:3px;font-size:11px}.mduy-lock-primary,.mduy-lock-secondary{width:100%;margin-top:15px;border:0;border-radius:12px;padding:13px 14px;font-weight:900;cursor:pointer}.mduy-lock-primary{background:linear-gradient(100deg,#65ffd0,#45e7ff 34%,#8d7aff 68%,#ff5fcf);color:#07101d;box-shadow:0 0 25px #45e7ff44}.mduy-lock-secondary{background:#202846;border:1px solid #56649c;color:#fff}.mduy-lock-status{text-align:center;min-height:18px;margin-bottom:0!important}.mduy-lock-status.error{color:#ff8da9}.mduy-lock-status.ok{color:#8dffd7}.mduy-lock-password{margin:13px 0 0;padding:12px;border:1px dashed #5cecff;border-radius:11px;text-align:center;font:900 20px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:2px;color:#fff;background:#071526}
-</style>
-
 </head>
 <body>
   <div class="shell">
@@ -290,21 +284,10 @@ THE SOFTWARE.
           <button class="download" id="download" type="button" disabled><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg><span id="download-label">Tạo MOD</span></button>
           <button class="download" id="download-all" type="button" disabled style="margin-top:10px"><span id="download-all-label">Tạo 4 phiên bản</span></button>
           <p id="status" class="status" role="status" aria-live="polite">Lựa chọn của bạn được lưu trên trình duyệt này.</p>
+          <a class="download" id="download-fallback" hidden style="margin-top:10px">Tải file vừa tạo</a>
         </div>
       </section>
     </main>
-    <div id="mduy-lock" hidden role="dialog" aria-modal="true" aria-labelledby="mduy-lock-title">
-      <div class="mduy-lock-card">
-        <div class="mduy-lock-head"><div><p class="mduy-lock-kicker">MDUY MOD FF</p><h2 id="mduy-lock-title">MOD đã sẵn sàng</h2></div><button id="mduy-lock-close" type="button" aria-label="Đóng">×</button></div>
-        <p id="mduy-lock-text">ZIP đã được tạo. File sẽ xuất hiện ngay trên trình duyệt để bạn tải xuống.</p>
-        <div class="mduy-lock-step"><span>1</span><div><strong>Tải ZIP</strong><small>File MOD sẽ bắt đầu xuất hiện ngay.</small></div></div>
-        <div class="mduy-lock-step"><span>2</span><div><strong>Lưu về máy</strong><small>Chọn lưu file nếu trình duyệt hỏi.</small></div></div>
-        <button id="mduy-get-password" class="mduy-lock-primary" type="button">TẢI FILE NGAY</button>
-        <button id="mduy-copy-link4m" class="mduy-lock-secondary" type="button" hidden>SAO CHÉP LINK</button>
-        <button id="mduy-download-locked" class="mduy-lock-secondary" type="button" hidden>TẢI ZIP</button>
-        <p id="mduy-lock-status" class="mduy-lock-status" role="status" aria-live="polite"></p>
-      </div>
-    </div>
     <noscript><p class="noscript">Bật JavaScript để chọn trang phục và tải file.</p></noscript>
     <footer><span>Dữ liệu Alok cho Android và iOS · Free Fire thường / MAX.</span><span>MDUY MOD FF · 4 phiên bản.</span></footer>
   </div>
@@ -801,119 +784,54 @@ self.onmessage=async event=>{
 })();
 </script>
 
-<script id="mduy-link4m-lock-runtime">
+<script id="mduy-local-download-runtime">
 (() => {
-  const BACKEND = 'https://mduy-mod-backend.onrender.com';
   const $ = id => document.getElementById(id);
-  const modal=$('mduy-lock'), getBtn=$('mduy-get-password'), copyBtn=$('mduy-copy-link4m'), dlBtn=$('mduy-download-locked'), closeBtn=$('mduy-lock-close'), status=$('mduy-lock-status');
-  let pendingJob=null, pendingName='MDUY-MOD.zip';
-
-  const show=(v=true)=>{if(!modal)return;modal.hidden=!v;if(v)status.textContent='';};
-  const setStatus=(text,kind='')=>{if(!status)return;status.className='mduy-lock-status '+kind;status.textContent=text;};
-  closeBtn?.addEventListener('click',()=>show(false));
-  modal?.addEventListener('click',e=>{if(e.target===modal)show(false);});
+  const status=$('status'),fallback=$('download-fallback');
+  let fallbackUrl=null;
+  const setStatus=(text,kind='')=>{status.className='status '+kind;status.textContent=text;};
 
   const selectionFromForm=()=>Object.fromEntries(['hair','top','bottom','shoes','mask','face','action'].map(k=>[k,$(k)?.value||'']));
-  const bytesToBase64=(bytes)=>{
-    let binary='';const chunk=0x8000;
-    for(let i=0;i<bytes.length;i+=chunk)binary+=String.fromCharCode(...bytes.subarray(i,i+chunk));
-    return btoa(binary);
+  const offerDownload=(bytes,name)=>{
+    if(fallbackUrl)URL.revokeObjectURL(fallbackUrl);
+    const blob=new Blob([bytes],{type:'application/zip'});
+    fallbackUrl=URL.createObjectURL(blob);
+    fallback.href=fallbackUrl;
+    fallback.download=name;
+    fallback.hidden=false;
+    fallback.click();
+    setStatus('File đã tạo. Nếu chưa tự tải, bấm “Tải file vừa tạo”.');
   };
-  const saveFile=(bytes,name)=>{const blob=bytes instanceof Blob?bytes:new Blob([bytes],{type:'application/zip'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500);};
   const packageOne=async(version,bytes)=>window.alokPackageDownload(bytes,version);
 
-  async function createLocked(packaged){
-    const zipBase64=bytesToBase64(packaged.bytes);
-    const r=await fetch(BACKEND+'/api/mod/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({zipBase64,filename:packaged.name})});
-    const data=await r.json().catch(()=>({}));
-    if(!r.ok)throw Error(data.error||'Backend không tạo được MOD.');
-    if(!data.id||!(data.downloadUrl||data.shortUrl))throw Error('Backend chưa trả về file tải.');
-    return {id:data.id,shortUrl:data.shortUrl||'',name:packaged.name,downloadUrl:data.downloadUrl||`${BACKEND}/api/mod/download/${encodeURIComponent(data.id)}`};
+  function begin(packaged){
+    offerDownload(packaged.bytes,packaged.name||'MDUY-MOD.zip');
   }
 
-  async function openDownloadTarget(job){
-    const url=job?.downloadUrl||job?.shortUrl;
-    if(!url)throw Error('File MOD chưa sẵn sàng.');
-    const response=await fetch(url,{cache:'no-store'});if(!response.ok)throw Error('Không tải được ZIP.');
-    saveFile(await response.blob(),pendingName||'MDUY-MOD.zip');
-    setStatus('Đã tải ZIP.','ok');
-    setTimeout(()=>show(false),1200);
-  }
-
-  async function begin(packaged){
-    pendingJob=null;pendingName=packaged.name||'MDUY-MOD.zip';getBtn.hidden=false;copyBtn.hidden=true;dlBtn.hidden=true;dlBtn.dataset.url='';
-    $('mduy-lock-title').textContent='MOD đã sẵn sàng';
-    $('mduy-lock-text').textContent='ZIP đã được tạo. File đang được tải xuống trình duyệt của bạn.';
-    setStatus('Đang tạo file MOD…');
-    try{
-      pendingJob=await createLocked(packaged);
-      dlBtn.hidden=false;dlBtn.dataset.url=pendingJob.downloadUrl||'';
-      await openDownloadTarget(pendingJob);
-    }catch(e){
-      setStatus(e.message||'Không tạo được MOD.','error');
-      pendingJob=null;
-      dlBtn.hidden=false;dlBtn.dataset.url='';
-      getBtn.hidden=false;
-    }
-  }
-
-  getBtn?.addEventListener('click',async()=>{
-    if(!pendingJob)return setStatus('MOD chưa tạo xong. Hãy thử lại.','error');
-    try{await openDownloadTarget(pendingJob);}catch(e){setStatus(e.message||'Không tải được ZIP.','error');}
-  });
-
-  copyBtn?.addEventListener('click',async()=>{
-    if(!pendingJob?.shortUrl)return setStatus('Liên kết rút gọn chưa sẵn sàng. Hãy thử lại.','error');
-    const shortUrl=pendingJob.shortUrl;
-    try{
-      if(navigator.clipboard&&window.isSecureContext){
-        await navigator.clipboard.writeText(shortUrl);
-      }else{
-        const field=document.createElement('textarea');
-        field.value=shortUrl;field.setAttribute('readonly','');
-        field.style.position='fixed';field.style.opacity='0';field.style.pointerEvents='none';
-        document.body.appendChild(field);field.select();field.setSelectionRange(0,field.value.length);
-        const copied=document.execCommand('copy');field.remove();
-        if(!copied)throw Error('Trình duyệt không cho phép sao chép tự động.');
-      }
-      setStatus('Đã sao chép liên kết.','ok');
-    }catch(e){
-      setStatus('Không tự sao chép được. Hãy thử lại.','error');
-    }
-  });
-
-  dlBtn?.addEventListener('click',async()=>{
-    const url=dlBtn.dataset.url;if(!url||dlBtn.disabled)return;
-    dlBtn.disabled=true;setStatus('Đang tải ZIP…');
-    try{const r=await fetch(url);if(!r.ok)throw Error('Không tải được ZIP.');saveFile(await r.blob(),pendingName||'MDUY-MOD.zip');setStatus('Đã tải ZIP.','ok');}
-    catch(e){setStatus(e.message||'Không tải được ZIP.','error');}finally{dlBtn.disabled=false;}
-  });
-
-  async function makeAndLock(btn){
+  async function makeAndDownload(btn){
     const version=$('version')?.value||'android-normal';
     const progress=$('mod-progress'),bar=$('mod-progress-bar'),percent=$('mod-progress-percent'),step=$('mod-progress-step');
-    show(false);progress.hidden=false;bar.value=0;percent.textContent='0%';step.textContent='Đang chuẩn bị dữ liệu…';
+    fallback.hidden=true;
+    if(fallbackUrl){URL.revokeObjectURL(fallbackUrl);fallbackUrl=null;}
+    progress.hidden=false;bar.value=0;percent.textContent='0%';step.textContent='Đang chuẩn bị dữ liệu…';
     try{
       await window.alokEnsureExport(p=>{bar.value=p;percent.textContent=p+'%';step.textContent='Đang ghép dữ liệu MOD… '+p+'%';;document.querySelectorAll('.mod-progress-step-chip').forEach((el,i)=>el.classList.toggle('active',p>=((i+1)*33-8)));});
       if(btn.id==='download-all'){
         step.textContent='Đang dựng 4 phiên bản…';
         const all=await window.alokExportAll(selectionFromForm(),p=>{bar.value=p;percent.textContent=p+'%';});
         const versionMap={'Android_FF_THUONG.zip':'android-normal','Android_FF_MAX.zip':'android-max','iOS_FF_THUONG.zip':'ios-normal','iOS_FF_MAX.zip':'ios-max'};
-        const entries=Object.entries(all);
-        for(const [index,[name,data]] of entries.entries()){
+        const bundle={};
+        for(const [name,data] of Object.entries(all)){
           const packaged=await packageOne(versionMap[name]||name.replace(/\.zip$/,''),data);
-          pendingName=packaged.name;
-          const job=await createLocked(packaged);
-          await openDownloadTarget(job);
-          if(index<entries.length-1){await new Promise(r=>setTimeout(r,500));}
+          bundle[packaged.name]=packaged.bytes;
         }
-        setStatus('Đã tạo và tải xong các file MOD.','ok');
+        offerDownload(fflate.zipSync(bundle,{level:0}),'MDUY MOD FF ALOK 4 PHIEN BAN.zip');
         return;
       }
       step.textContent='Đang tạo MOD…';
       const bytes=await window.alokExport(selectionFromForm(),version,p=>{bar.value=p;percent.textContent=p+'%';});
       const packaged=await packageOne(version,bytes);
-      await begin(packaged);
+      begin(packaged);
     }catch(err){if(err?.name!=='AbortError'){setStatus(err.message||'Không tạo được file.','error');}}
     finally{progress.hidden=true;}
   }
@@ -922,7 +840,7 @@ self.onmessage=async event=>{
     document.addEventListener('click',async e=>{
       const btn=e.target.closest?.('#download,#download-all');if(!btn||btn.disabled)return;
       e.preventDefault();e.stopImmediatePropagation();
-      await makeAndLock(btn);
+      await makeAndDownload(btn);
     },true);
   }
 
